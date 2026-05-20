@@ -1,0 +1,1788 @@
+<!DOCTYPE html>
+<html lang="fil">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panitikang Pilipino — Tahanan ng Wikang Lahi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Upright:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ===== CSS VARIABLES ===== */
+:root {
+  --burgundy: #6B1120;
+  --burgundy-dark: #4A0B16;
+  --burgundy-light: #9B2335;
+  --gold: #C9A84C;
+  --gold-light: #E2C97E;
+  --gold-pale: #F5E9C6;
+  --cream: #FAF3E8;
+  --cream-dark: #F0E6D0;
+  --ink: #1C0F0A;
+  --ink-mid: #3D2B1F;
+  --ink-light: #6B4C3B;
+  --white: #FFFDF8;
+  --shadow: rgba(28,15,10,0.18);
+  --radius: 4px;
+  --radius-lg: 12px;
+  --transition: 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'EB Garamond', Georgia, serif;
+  background: var(--cream);
+  color: var(--ink);
+  font-size: 18px;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+/* ===== DECORATIVE PATTERN ===== */
+.pattern-bg {
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(201,168,76,0.15) 1px, transparent 0);
+  background-size: 28px 28px;
+}
+
+/* ===== NAVIGATION ===== */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: var(--burgundy-dark);
+  border-bottom: 2px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.5rem;
+  height: 64px;
+  box-shadow: 0 4px 24px var(--shadow);
+}
+.nav-brand {
+  font-family: 'Cormorant Upright', serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--gold-light);
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-brand span.mark {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+.nav-links {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+.nav-links button {
+  font-family: 'EB Garamond', serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgba(245,233,198,0.75);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  transition: color var(--transition), background var(--transition);
+  letter-spacing: 0.02em;
+}
+.nav-links button:hover,
+.nav-links button.active {
+  color: var(--gold-light);
+  background: rgba(201,168,76,0.12);
+}
+.nav-links button.active {
+  border-bottom: 2px solid var(--gold);
+  border-radius: 0;
+}
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+.hamburger span {
+  display: block;
+  width: 24px; height: 2px;
+  background: var(--gold-light);
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+/* ===== MOBILE NAV ===== */
+@media (max-width: 768px) {
+  nav { padding: 0 1.25rem; }
+  .hamburger { display: flex; }
+  .nav-links {
+    position: fixed;
+    top: 64px; left: 0; right: 0;
+    flex-direction: column;
+    background: var(--burgundy-dark);
+    border-bottom: 2px solid var(--gold);
+    padding: 1rem;
+    gap: 0.25rem;
+    transform: translateY(-120%);
+    opacity: 0;
+    transition: var(--transition);
+    z-index: 999;
+  }
+  .nav-links.open {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .nav-links button { width: 100%; text-align: left; padding: 12px 16px; }
+}
+
+/* ===== PAGE SECTIONS ===== */
+.page {
+  display: none;
+  min-height: 100vh;
+  padding-top: 64px;
+  animation: fadeInUp 0.5s ease forwards;
+}
+.page.active { display: block; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== HOMEPAGE ===== */
+.hero {
+  position: relative;
+  min-height: calc(100vh - 64px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--burgundy-dark);
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, var(--burgundy-dark) 0%, #3A0010 40%, #6B2010 100%);
+  z-index: 0;
+}
+.hero-pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(255,100,50,0.06) 0%, transparent 50%),
+    repeating-linear-gradient(
+      45deg,
+      transparent, transparent 40px,
+      rgba(201,168,76,0.03) 40px,
+      rgba(201,168,76,0.03) 41px
+    );
+  z-index: 1;
+}
+.hero-deco {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
+  z-index: 2;
+}
+.hero-deco-bottom {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
+  z-index: 2;
+}
+.hero-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  padding: 4rem 2rem;
+  max-width: 900px;
+  animation: heroReveal 1s ease 0.2s both;
+}
+@keyframes heroReveal {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-eyebrow {
+  font-family: 'EB Garamond', serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.hero-eyebrow::before,
+.hero-eyebrow::after {
+  content: '';
+  display: block;
+  width: 40px; height: 1px;
+  background: var(--gold);
+  opacity: 0.6;
+}
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.05;
+  margin-bottom: 0.4em;
+  text-shadow: 0 2px 40px rgba(0,0,0,0.4);
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--gold-light);
+}
+.hero-subtitle {
+  font-family: 'Cormorant Upright', serif;
+  font-size: clamp(1.2rem, 3vw, 1.75rem);
+  color: rgba(245,233,198,0.75);
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+}
+.hero-divider {
+  width: 80px; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 0 auto 2rem;
+}
+.hero-intro {
+  font-size: 1.1rem;
+  color: rgba(250,243,232,0.8);
+  max-width: 620px;
+  margin: 0 auto 3rem;
+  line-height: 1.85;
+}
+.hero-cta {
+  display: inline-block;
+  padding: 14px 40px;
+  background: transparent;
+  border: 1.5px solid var(--gold);
+  color: var(--gold-light);
+  font-family: 'EB Garamond', serif;
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.hero-cta:hover {
+  background: var(--gold);
+  color: var(--burgundy-dark);
+  box-shadow: 0 0 30px rgba(201,168,76,0.3);
+}
+.hero-scroll {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: rgba(201,168,76,0.5);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  animation: bounce 2s ease infinite;
+}
+.scroll-arrow {
+  width: 20px; height: 20px;
+  border-right: 1.5px solid rgba(201,168,76,0.5);
+  border-bottom: 1.5px solid rgba(201,168,76,0.5);
+  transform: rotate(45deg);
+}
+@keyframes bounce {
+  0%,100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(6px); }
+}
+
+/* Featured strip */
+.home-features {
+  background: var(--cream-dark);
+  border-top: 3px solid var(--gold);
+  border-bottom: 1px solid rgba(201,168,76,0.3);
+}
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.feature-item {
+  padding: 3rem 2.5rem;
+  border-right: 1px solid rgba(201,168,76,0.2);
+  transition: background var(--transition);
+}
+.feature-item:last-child { border-right: none; }
+.feature-item:hover { background: rgba(201,168,76,0.05); }
+.feature-num {
+  font-family: 'Cormorant Upright', serif;
+  font-size: 3rem;
+  font-weight: 300;
+  color: var(--gold);
+  opacity: 0.5;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.feature-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--burgundy);
+  margin-bottom: 0.5rem;
+}
+.feature-desc {
+  font-size: 0.9rem;
+  color: var(--ink-light);
+  line-height: 1.6;
+}
+
+/* About intro strip */
+.home-quote {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 6rem 2rem;
+  text-align: center;
+}
+.blockquote-text {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  font-style: italic;
+  color: var(--burgundy);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+.blockquote-attr {
+  font-size: 0.9rem;
+  color: var(--ink-light);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ===== SECTION COMMONS ===== */
+.section-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+.section-eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-family: 'EB Garamond', serif;
+  margin-bottom: 1rem;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 700;
+  color: var(--burgundy-dark);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+.section-line {
+  width: 60px; height: 3px;
+  background: linear-gradient(90deg, var(--burgundy), var(--gold));
+  margin: 1rem auto 0;
+  border-radius: 2px;
+}
+.section-desc {
+  max-width: 600px;
+  margin: 1.5rem auto 0;
+  color: var(--ink-light);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* ===== ABOUT PAGE ===== */
+#about { background: var(--white); }
+.about-intro-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  margin-bottom: 5rem;
+}
+@media (max-width: 768px) {
+  .about-intro-row { grid-template-columns: 1fr; gap: 2rem; }
+}
+.about-intro-text h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 4vw, 2.75rem);
+  color: var(--burgundy-dark);
+  margin-bottom: 1.25rem;
+  line-height: 1.25;
+}
+.about-intro-text p {
+  color: var(--ink-mid);
+  margin-bottom: 1rem;
+  font-size: 1.05rem;
+}
+.about-info-box {
+  background: var(--cream);
+  border: 1.5px solid var(--gold-pale);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+}
+.about-info-row {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--cream-dark);
+}
+.about-info-row:last-child { border-bottom: none; }
+.about-info-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  min-width: 90px;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+.about-info-val {
+  font-size: 1rem;
+  color: var(--ink-mid);
+}
+
+/* Members */
+.members-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.member-card {
+  background: var(--white);
+  border: 1px solid var(--cream-dark);
+  border-top: 3px solid var(--burgundy);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  transition: transform var(--transition), box-shadow var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.member-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--burgundy), var(--gold));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition);
+}
+.member-card:hover::before { transform: scaleX(1); }
+.member-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(107,17,32,0.12);
+}
+.member-avatar {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--burgundy), var(--gold));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-family: 'Cormorant Upright', serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 1.25rem;
+  flex-shrink: 0;
+}
+.member-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.25rem;
+}
+.member-role {
+  font-size: 0.85rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+.member-section {
+  font-size: 0.9rem;
+  color: var(--ink-light);
+  padding: 4px 12px;
+  background: var(--cream);
+  border-radius: 99px;
+  display: inline-block;
+}
+
+/* ===== LITERARY WORKS ===== */
+#literary { background: var(--cream); }
+.works-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+.work-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 2px 20px rgba(28,15,10,0.08);
+  transition: box-shadow var(--transition);
+}
+.work-card:hover { box-shadow: 0 8px 40px rgba(107,17,32,0.14); }
+.work-header {
+  background: var(--burgundy-dark);
+  padding: 2rem 2.5rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+}
+@media (max-width: 600px) {
+  .work-header { flex-direction: column; gap: 1rem; padding: 1.5rem; }
+}
+.work-header-left { flex: 1; }
+.work-type-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  background: rgba(201,168,76,0.15);
+  border: 1px solid rgba(201,168,76,0.4);
+  border-radius: 99px;
+  color: var(--gold-light);
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+.work-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+.work-author {
+  color: var(--gold-pale);
+  opacity: 0.75;
+  font-style: italic;
+  font-size: 1rem;
+}
+.work-number {
+  font-family: 'Cormorant Upright', serif;
+  font-size: 5rem;
+  font-weight: 300;
+  color: rgba(201,168,76,0.15);
+  line-height: 1;
+  flex-shrink: 0;
+  user-select: none;
+}
+.work-body {
+  padding: 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+}
+@media (max-width: 700px) {
+  .work-body { grid-template-columns: 1fr; gap: 1.5rem; padding: 1.5rem; }
+}
+.work-section-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.work-section-label::after {
+  content: '';
+  display: block;
+  flex: 1;
+  height: 1px;
+  background: var(--cream-dark);
+}
+.work-section-text {
+  font-size: 0.97rem;
+  color: var(--ink-mid);
+  line-height: 1.75;
+}
+.work-full {
+  padding: 0 2.5rem 2.5rem;
+}
+@media (max-width: 700px) {
+  .work-full { padding: 0 1.5rem 1.5rem; }
+}
+.work-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 0.75rem;
+}
+.work-tag {
+  padding: 4px 14px;
+  background: var(--cream);
+  border: 1px solid var(--cream-dark);
+  border-radius: 99px;
+  font-size: 0.82rem;
+  color: var(--ink-light);
+}
+.reflection-box {
+  background: linear-gradient(135deg, var(--cream), var(--gold-pale));
+  border-left: 4px solid var(--gold);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  padding: 1.5rem 2rem;
+  margin-top: 1.5rem;
+  font-style: italic;
+  color: var(--ink-mid);
+  font-size: 0.97rem;
+  line-height: 1.75;
+}
+.reflection-box strong {
+  display: block;
+  font-style: normal;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--burgundy);
+  margin-bottom: 0.5rem;
+}
+
+/* ===== MULTIMEDIA ===== */
+#multimedia {
+  background: var(--burgundy-dark);
+  color: var(--cream);
+}
+#multimedia .section-title { color: var(--gold-light); }
+#multimedia .section-eyebrow { color: var(--gold); }
+
+/* Timeline */
+.timeline {
+  position: relative;
+  padding: 2rem 0;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, var(--gold), var(--gold), transparent);
+}
+@media (max-width: 768px) {
+  .timeline::before { left: 24px; }
+}
+.timeline-item {
+  display: flex;
+  gap: 3rem;
+  margin-bottom: 3rem;
+  align-items: flex-start;
+  position: relative;
+}
+.timeline-item:nth-child(even) {
+  flex-direction: row-reverse;
+}
+@media (max-width: 768px) {
+  .timeline-item,
+  .timeline-item:nth-child(even) {
+    flex-direction: row;
+    padding-left: 60px;
+    gap: 1.5rem;
+  }
+}
+.timeline-content {
+  flex: 1;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  transition: background var(--transition);
+}
+.timeline-content:hover {
+  background: rgba(201,168,76,0.07);
+}
+.timeline-date {
+  font-family: 'Cormorant Upright', serif;
+  font-size: 1.75rem;
+  font-weight: 300;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+.timeline-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+.timeline-desc {
+  font-size: 0.9rem;
+  color: rgba(250,243,232,0.65);
+  line-height: 1.65;
+}
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  top: 1.75rem;
+  transform: translateX(-50%);
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 3px solid var(--burgundy-dark);
+  z-index: 1;
+  box-shadow: 0 0 0 4px rgba(201,168,76,0.2);
+}
+@media (max-width: 768px) {
+  .timeline-dot {
+    left: 24px;
+    top: 1.75rem;
+  }
+  .timeline-item:nth-child(even) .timeline-content:first-child,
+  .timeline-item .timeline-content:last-child { display: none; }
+}
+.timeline-spacer { flex: 1; }
+
+/* Gallery */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(201,168,76,0.2);
+  aspect-ratio: 4/3;
+  cursor: pointer;
+  background: rgba(255,255,255,0.04);
+  transition: transform var(--transition);
+}
+.gallery-item:hover { transform: scale(1.02); }
+.gallery-img-placeholder {
+  width: 100%; height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 1.5rem;
+  text-align: center;
+}
+.gallery-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+.gallery-caption {
+  font-size: 0.88rem;
+  color: rgba(245,233,198,0.7);
+  line-height: 1.5;
+}
+.gallery-item-1 { background: linear-gradient(135deg, rgba(107,17,32,0.8), rgba(60,10,0,0.9)); }
+.gallery-item-2 { background: linear-gradient(135deg, rgba(80,40,10,0.8), rgba(50,25,0,0.9)); }
+.gallery-item-3 { background: linear-gradient(135deg, rgba(30,50,90,0.8), rgba(15,30,60,0.9)); }
+.gallery-item-4 { background: linear-gradient(135deg, rgba(40,80,40,0.8), rgba(20,50,20,0.9)); }
+.gallery-item-5 { background: linear-gradient(135deg, rgba(70,20,70,0.8), rgba(40,10,50,0.9)); }
+.gallery-item-6 { background: linear-gradient(135deg, rgba(90,60,20,0.8), rgba(60,40,10,0.9)); }
+
+.gallery-item:hover .gallery-img-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(201,168,76,0.08);
+}
+
+/* Video embed */
+.video-section {
+  margin-top: 4rem;
+}
+.video-container {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 16/9;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  transition: border-color var(--transition);
+}
+.video-container:hover { border-color: rgba(201,168,76,0.5); }
+.video-play-btn {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition), box-shadow var(--transition);
+  z-index: 2;
+}
+.video-play-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 40px rgba(201,168,76,0.4);
+}
+.play-triangle {
+  width: 0; height: 0;
+  border-top: 14px solid transparent;
+  border-bottom: 14px solid transparent;
+  border-left: 24px solid var(--burgundy-dark);
+  margin-left: 6px;
+}
+.video-overlay-text {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 0; right: 0;
+  text-align: center;
+  font-size: 0.9rem;
+  color: rgba(245,233,198,0.6);
+}
+.video-bg-text {
+  position: absolute;
+  font-family: 'Cormorant Upright', serif;
+  font-size: 8rem;
+  font-weight: 300;
+  color: rgba(201,168,76,0.05);
+  user-select: none;
+  pointer-events: none;
+  line-height: 1;
+}
+.multimedia-tabs {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+.multi-tab {
+  padding: 10px 24px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 99px;
+  color: rgba(245,233,198,0.65);
+  font-family: 'EB Garamond', serif;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.multi-tab.active,
+.multi-tab:hover {
+  background: rgba(201,168,76,0.15);
+  border-color: var(--gold);
+  color: var(--gold-light);
+}
+.multi-panel { display: none; }
+.multi-panel.active { display: block; animation: fadeInUp 0.4s ease; }
+
+/* ===== REFERENCES ===== */
+#references { background: var(--white); }
+.refs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+.refs-category {
+  background: var(--cream);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  border-top: 3px solid var(--burgundy);
+}
+.refs-category-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--burgundy-dark);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.refs-icon {
+  width: 36px; height: 36px;
+  background: var(--burgundy);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.ref-item {
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--cream-dark);
+}
+.ref-item:last-child { border-bottom: none; }
+.ref-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.25rem;
+}
+.ref-detail {
+  font-size: 0.85rem;
+  color: var(--ink-light);
+  line-height: 1.5;
+  font-style: italic;
+}
+.ref-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.82rem;
+  color: var(--burgundy);
+  margin-top: 4px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  opacity: 0.75;
+  transition: opacity var(--transition);
+}
+.ref-link:hover { opacity: 1; }
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--ink);
+  color: rgba(250,243,232,0.5);
+  text-align: center;
+  padding: 2.5rem 2rem;
+}
+footer .footer-title {
+  font-family: 'Cormorant Upright', serif;
+  font-size: 1.25rem;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+}
+footer p {
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+footer .footer-divider {
+  width: 40px; height: 1px;
+  background: rgba(201,168,76,0.3);
+  margin: 1.5rem auto;
+}
+
+/* ===== ANIMATIONS ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream-dark); }
+::-webkit-scrollbar-thumb { background: var(--burgundy); border-radius: 3px; }
+
+/* ===== UTILITIES ===== */
+.text-center { text-align: center; }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.text-gold { color: var(--gold); }
+.divider-gold {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-pale), transparent);
+  margin: 2rem 0;
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav role="navigation" aria-label="Pangunahing Menu">
+  <div class="nav-brand">
+    <span class="mark"></span>
+    Panitikan ng Pilipinas
+  </div>
+  <button class="hamburger" onclick="toggleMobile()" aria-label="Buksan ang menu" aria-expanded="false" id="hamburger">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links" id="navLinks">
+    <button onclick="showPage('home')" class="active" id="nav-home">Tahanan</button>
+    <button onclick="showPage('about')" id="nav-about">Tungkol Sa Amin</button>
+    <button onclick="showPage('literary')" id="nav-literary">Mga Akda</button>
+    <button onclick="showPage('multimedia')" id="nav-multimedia">Multimedia</button>
+    <button onclick="showPage('references')" id="nav-references">Sanggunian</button>
+  </div>
+</nav>
+
+<!-- ===== HOME PAGE ===== -->
+<section id="home" class="page active" role="main">
+
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-pattern"></div>
+    <div class="hero-deco"></div>
+    <div class="hero-deco-bottom"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">BSIT 1D — Panitikan &amp; Teknolohiya</div>
+      <h1 class="hero-title">
+        Panitikan ng<br><em>Pilipinas</em>
+      </h1>
+      <p class="hero-subtitle">Tahanan ng Wikang Lahi</p>
+      <div class="hero-divider"></div>
+      <p class="hero-intro">
+        Isang koleksyon ng mga piling akdang pampanitikan ng Pilipinas — mula sa epikong bayani
+        hanggang sa tula ng pag-ibig sa bayan. Ito ang aming pagpaparangal sa kayamanan ng
+        kulturang Pilipino.
+      </p>
+      <button class="hero-cta" onclick="showPage('literary')">Tuklasin ang mga Akda</button>
+    </div>
+    <div class="hero-scroll" aria-hidden="true">
+      <span>Mag-scroll</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </div>
+
+  <div class="home-features pattern-bg">
+    <div class="features-grid">
+      <div class="feature-item reveal">
+        <div class="feature-num">01</div>
+        <div class="feature-title">Tatlong Piling Akda</div>
+        <div class="feature-desc">Epiko, tula, at korido mula sa kayamanan ng panitikang Pilipino.</div>
+      </div>
+      <div class="feature-item reveal">
+        <div class="feature-num">02</div>
+        <div class="feature-title">Multimedia</div>
+        <div class="feature-desc">Timeline, gallery, at video na nagbibigay-buhay sa aming mga akda.</div>
+      </div>
+      <div class="feature-item reveal">
+        <div class="feature-num">03</div>
+        <div class="feature-title">Repleksiyon</div>
+        <div class="feature-desc">Personal na pag-iisip ng pangkat sa bawat akdang napili.</div>
+      </div>
+      <div class="feature-item reveal">
+        <div class="feature-num">04</div>
+        <div class="feature-title">Sanggunian</div>
+        <div class="feature-desc">Kumpletong listahan ng mga pinagkukunan ng impormasyon.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="home-quote">
+    <p class="blockquote-text">
+      "Ang hindi marunong lumingon sa pinanggalingan ay hindi makararating sa paroroonan."
+    </p>
+    <p class="blockquote-attr">— José P. Rizal</p>
+  </div>
+
+</section>
+
+<!-- ===== ABOUT PAGE ===== -->
+<section id="about" class="page">
+  <div class="section-wrapper">
+    <div class="section-header">
+      <p class="section-eyebrow">Ang Aming Pangkat</p>
+      <h2 class="section-title">Tungkol Sa Amin</h2>
+      <div class="section-line"></div>
+      <p class="section-desc">
+        Kami ay isang pangkat ng mga estudyante ng BSIT na nagsiksik ng kaalaman sa
+        panitikan at teknolohiya upang malikha ang website na ito.
+      </p>
+    </div>
+
+    <div class="about-intro-row">
+      <div class="about-intro-text reveal">
+        <h2>Ang Aming<br><em style="font-style:italic; color:var(--burgundy);">Misyon</em></h2>
+        <p>
+          Layunin naming pagsamahin ang kaalaman sa panitikan at modernong teknolohiya
+          sa pamamagitan ng paglikha ng isang organisado, malikhaing, at interactive na
+          website tungkol sa Panitikang Pilipino.
+        </p>
+        <p>
+          Naniniwala kaming ang mga akdang pampanitikan ay bahagi ng ating pagkakakilanlan
+          bilang mga Pilipino — at dapat itong mapanatili at maibahagi sa susunod na henerasyon.
+        </p>
+      </div>
+      <div class="about-info-box reveal">
+        <div class="about-info-row">
+          <span class="about-info-label">Kurso</span>
+          <span class="about-info-val">Bachelor of Science in Information Technology</span>
+        </div>
+        <div class="about-info-row">
+          <span class="about-info-label">Seksiyon</span>
+          <span class="about-info-val">BSIT 1D</span>
+        </div>
+        <div class="about-info-row">
+          <span class="about-info-label">Guro</span>
+          <span class="about-info-val">Cherrie Manching</span>
+        </div>
+        <div class="about-info-row">
+          <span class="about-info-label">Taong Paaralan</span>
+          <span class="about-info-val">2025–2026</span>
+        </div>
+        <div class="about-info-row">
+          <span class="about-info-label">Paksa</span>
+          <span class="about-info-val">Panitikan ng Pilipinas</span>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Playfair Display',serif; font-size:1.75rem; font-weight:700; color:var(--burgundy-dark); margin-bottom:2rem; text-align:center;">
+      Mga Miyembro ng Pangkat
+    </h3>
+
+    <div class="members-grid">
+      <div class="member-card reveal">
+        <div class="member-avatar">CC</div>
+        <div class="member-name">Christian Darnell Casul</div>
+        <div class="member-role">Project In-Charge</div>
+        <div class="member-section">BSIT 1D</div>
+        <p style="font-size:0.88rem; color:var(--ink-light); margin-top:0.75rem; line-height:1.6;">
+          Namamahala sa kabuuang disenyo at estruktura ng website. Nag-coordinate sa lahat ng miyembro.
+        </p>
+      </div>
+      <div class="member-card reveal">
+        <div class="member-avatar">JT</div>
+        <div class="member-name">Jankyle R. Torrejas</div>
+        <div class="member-role">Content Writer</div>
+        <div class="member-section">BSIT 1D</div>
+        <p style="font-size:0.88rem; color:var(--ink-light); margin-top:0.75rem; line-height:1.6;">
+          Nagsulat ng buod, tema, aral, at repleksiyon ng pangkat para sa bawat akda.
+        </p>
+      </div>
+      <div class="member-card reveal">
+        <div class="member-avatar">JR</div>
+        <div class="member-name">Jhenry S. Rosani</div>
+        <div class="member-role">Web Developer</div>
+        <div class="member-section">BSIT 1D</div>
+        <p style="font-size:0.88rem; color:var(--ink-light); margin-top:0.75rem; line-height:1.6;">
+          Bumuo ng HTML at CSS code ng website. Nag-ayos ng layout at responsiveness.
+        </p>
+      </div>
+      <div class="member-card reveal">
+        <div class="member-avatar">CR</div>
+        <div class="member-name">Cristy Jean B. Romano</div>
+        <div class="member-role">Multimedia Designer</div>
+        <div class="member-section">BSIT 1D</div>
+        <p style="font-size:0.88rem; color:var(--ink-light); margin-top:0.75rem; line-height:1.6;">
+          Namamahala sa multimedia section — gallery, timeline, at mga visual na elemento.
+        </p>
+      </div>
+      <div class="member-card reveal">
+        <div class="member-avatar">KA</div>
+        <div class="member-name">Kera M. Amoren</div>
+        <div class="member-role">Researcher</div>
+        <div class="member-section">BSIT 1D</div>
+        <p style="font-size:0.88rem; color:var(--ink-light); margin-top:0.75rem; line-height:1.6;">
+          Nangolekta ng mga akda at naghanap ng sanggunian para sa Literary Works page.
+        </p>
+      </div>
+      <div class="member-card reveal">
+        <div class="member-avatar">JS</div>
+        <div class="member-name">Justin John B. Sumampong</div>
+        <div class="member-role">Researcher</div>
+        <div class="member-section">BSIT 1D</div>
+        <p style="font-size:0.88rem; color:var(--ink-light); margin-top:0.75rem; line-height:1.6;">
+          Nangolekta ng mga akda at naghanap ng sanggunian para sa Literary Works page.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LITERARY WORKS PAGE ===== -->
+<section id="literary" class="page">
+  <div class="section-wrapper">
+    <div class="section-header">
+      <p class="section-eyebrow">Mga Piling Akda</p>
+      <h2 class="section-title">Panitikang Pilipino</h2>
+      <div class="section-line"></div>
+      <p class="section-desc">
+        Tatlong akdang pampanitikan na nagpapakita ng yaman ng kultura at diwa ng Pilipinas —
+        mula sa sinaunang panahon hanggang sa kasalukuyan.
+      </p>
+    </div>
+
+    <div class="works-list">
+
+      <!-- AKDA 1: FLORANTE AT LAURA -->
+      <article class="work-card reveal">
+        <div class="work-header">
+          <div class="work-header-left">
+            <span class="work-type-badge">Epikong Awit</span>
+            <h3 class="work-title">Florante at Laura</h3>
+            <p class="work-author">ni Francisco Balagtas (Baltazar)</p>
+          </div>
+          <div class="work-number" aria-hidden="true">01</div>
+        </div>
+        <div class="work-body">
+          <div>
+            <p class="work-section-label">Buod</p>
+            <p class="work-section-text">
+              Si Florante, isang prinsipe ng Albanya, ay natagpuang nakatali sa isang puno ng sedro
+              sa gitna ng isang kagubatan. Siya ay inatsaka ng mga mababangis na hayop. Naligtas siya
+              ni Aladin, isang Moro, na kalaunan ay naging kanyang kaibigan. Inilahad ni Florante
+              ang kanyang kwento — ang kanyang pag-ibig kay Laura, ang kanyang mga kaaway, at ang
+              pagtataksil ni Adolfo. Sa tulong ni Aladin, nagtagumpay si Florante at nabawi ang
+              kaharian at ang puso ni Laura.
+            </p>
+          </div>
+          <div>
+            <p class="work-section-label">Tema</p>
+            <div class="work-tags">
+              <span class="work-tag">Tunay na Pag-ibig</span>
+              <span class="work-tag">Katapatan</span>
+              <span class="work-tag">Kabutihan laban sa Kasamaan</span>
+              <span class="work-tag">Pagkakaibigan</span>
+            </div>
+            <p class="work-section-label" style="margin-top:1.5rem;">Aral</p>
+            <p class="work-section-text">
+              Ang tunay na pagibig at katapatan ay magagapi ang anumang balakid.
+              Ang kabutihan ay laging mananalo laban sa kataksilan at panlilinlang.
+              Ang tunay na pagkakaibigan ay hindi nakasalalay sa lahi o relihiyon.
+            </p>
+          </div>
+        </div>
+        <div class="work-full">
+          <hr class="divider-gold">
+          <div class="reflection-box">
+            <strong>Repleksiyon ng Pangkat</strong>
+            Bilang mga kabataang Pilipino, nararamdaman namin ang damdaming inilalahad ni Balagtas
+            sa kanyang akda. Ang "Florante at Laura" ay hindi lamang isang kuwento ng pag-ibig —
+            ito ay isang matapang na kritisismo sa kolonyal na panahon na may belo ng romantisismo.
+            Nakakahalina ang paraan ng pagsasalita ng mga tauhan sa pamamagitan ng tulang may sukat
+            at tugma, at nagpapakita ito ng kahusayan ng wikang Filipino sa pagpapahayag ng
+            pinakamalalim na damdamin ng puso.
+          </div>
+        </div>
+      </article>
+
+      <!-- AKDA 2: SA AKING MGA KABATA -->
+      <article class="work-card reveal">
+        <div class="work-header">
+          <div class="work-header-left">
+            <span class="work-type-badge">Tula</span>
+            <h3 class="work-title">Sa Aking mga Kabata</h3>
+            <p class="work-author">ni José Protasio Rizal Mercado y Alonso Realonda</p>
+          </div>
+          <div class="work-number" aria-hidden="true">02</div>
+        </div>
+        <div class="work-body">
+          <div>
+            <p class="work-section-label">Buod</p>
+            <p class="work-section-text">
+              Isinulat ni Rizal ang tulang ito nang may walong taong gulang lamang siya noong 1869.
+              Ipinaabot niya ang kanyang mensahe sa mga kabataang Pilipino — na ang kalayaan ng
+              isang bansa ay nagsisimula sa pagmamahal sa sariling wika. Ang bawat taludtod ay
+              nagpapaalala na ang isang bayang walang pagpapahalaga sa kanilang sariling wika ay
+              katulad ng isang alipin na tinanggap ang pagkaalipin ng buong puso.
+            </p>
+          </div>
+          <div>
+            <p class="work-section-label">Tema</p>
+            <div class="work-tags">
+              <span class="work-tag">Pagmamahal sa Wika</span>
+              <span class="work-tag">Kalayaan</span>
+              <span class="work-tag">Pagkakakilanlan</span>
+              <span class="work-tag">Kabataang Pilipino</span>
+            </div>
+            <p class="work-section-label" style="margin-top:1.5rem;">Aral</p>
+            <p class="work-section-text">
+              Ang pagmamahal sa sariling wika ay katumbas ng pagmamahal sa sariling bansa.
+              Ang isang bansang walang wika ay walang kaluluwa. Tayong mga kabataan ang
+              pag-asa ng Inang Bayan — at ang wikang ating ginagamit ay salamin ng ating
+              pagkakakilanlan.
+            </p>
+          </div>
+        </div>
+        <div class="work-full">
+          <hr class="divider-gold">
+          <div class="reflection-box">
+            <strong>Repleksiyon ng Pangkat</strong>
+            Kahanga-hanga na nakapaglikha ng ganitong malalim na tula ang isang batang walo
+            ang taon lamang. Para sa amin, ang tulang ito ay isang hamon sa lahat ng kabataang
+            Pilipino — tayong mga BSIT student na lagi na lamang gumagamit ng Ingles sa
+            teknolohiya. Ipinaaalala nito sa amin na huwag kalimutan ang sariling wika kahit
+            sa mundo ng coding at programming. Ang Pilipino ay kasing ganda ng anumang wika
+            sa mundo, at dapat nating ipagmalaki ito.
+          </div>
+        </div>
+      </article>
+
+      <!-- AKDA 3: IBONG ADARNA -->
+      <article class="work-card reveal">
+        <div class="work-header">
+          <div class="work-header-left">
+            <span class="work-type-badge">Korido / Alamat</span>
+            <h3 class="work-title">Ibong Adarna</h3>
+            <p class="work-author">Inaakalang ni José de la Cruz "Huseng Sisiw" (tradisyonal)</p>
+          </div>
+          <div class="work-number" aria-hidden="true">03</div>
+        </div>
+        <div class="work-body">
+          <div>
+            <p class="work-section-label">Buod</p>
+            <p class="work-section-text">
+              Ang haring Fermino Fernando Berbania ay nagkasakit ng malubha. Tanging ang awit ng
+              Ibong Adarna sa bundok ng Tabor ang makakapagpagaling sa kanya. Tatlong prinsipe —
+              sina Don Pedro, Don Diego, at Don Juan — ang nagsunud-sunod na humangos upang
+              hanapin ang mahiwagang ibon. Dahil sa kapalaluan at kawalan ng tiyaga nina Pedro at
+              Diego, sila ay nabigo at natibag. Si Don Juan, ang bunso at mapagpakumbabang prinsipe,
+              sa pamamagitan ng kanyang tapang, habag, at pananampalataya, ay nagtagumpay na mahuli
+              ang Ibong Adarna at naibaling ang kalusugan ng kanilang ama.
+            </p>
+          </div>
+          <div>
+            <p class="work-section-label">Tema</p>
+            <div class="work-tags">
+              <span class="work-tag">Katapangan</span>
+              <span class="work-tag">Kababaang-loob</span>
+              <span class="work-tag">Pananampalataya</span>
+              <span class="work-tag">Pagmamahal sa Pamilya</span>
+              <span class="work-tag">Kabutihang-loob</span>
+            </div>
+            <p class="work-section-label" style="margin-top:1.5rem;">Aral</p>
+            <p class="work-section-text">
+              Ang kababaang-loob at kabaitan ay mas makapangyarihan kaysa sa kayamanan at
+              kapangyarihan. Ang tunay na tapang ay hindi lamang lakas ng katawan kundi lakas
+              ng loob at puso. Ang pagmamahal sa pamilya ay nagtutulak sa atin na gawin ang
+              imposible.
+            </p>
+          </div>
+        </div>
+        <div class="work-full">
+          <hr class="divider-gold">
+          <div class="reflection-box">
+            <strong>Repleksiyon ng Pangkat</strong>
+            Ang Ibong Adarna ay isang mahiwagang kwento na namumuhay sa puso ng bawat Pilipinong
+            lumaki na nakarinig nito. Habang pinag-aaralan namin ito, napagtanto naming ang kwentong
+            ito ay nagtataglay ng malalim na aral tungkol sa buhay — na ang tagumpay ay hindi
+            nakukuha ng mga arrogante at mapagmataas, kundi ng mga taong may puso at tapat na
+            loob. Bilang mga estudyante, ikinukumpara namin si Don Juan sa aming buhay — na
+            kahit tayo ang pinaka-bata o pinaka-bago sa isang larangan, ang ating determinasyon
+            at kabaitan ang magdadala sa atin sa tagumpay.
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== MULTIMEDIA PAGE ===== -->
+<section id="multimedia" class="page">
+  <div class="section-wrapper">
+    <div class="section-header">
+      <p class="section-eyebrow">Multimedia</p>
+      <h2 class="section-title" style="color:var(--gold-light);">Panitikan sa Iba't ibang Anyo</h2>
+      <div class="section-line"></div>
+      <p class="section-desc" style="color:rgba(250,243,232,0.65);">
+        Tuklasin ang Panitikang Pilipino sa pamamagitan ng iba't ibang media —
+        timeline, gallery, at video.
+      </p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="multimedia-tabs">
+      <button class="multi-tab active" onclick="showTab('timeline')">📅 Timeline</button>
+      <button class="multi-tab" onclick="showTab('gallery')">🖼 Gallery</button>
+      <button class="multi-tab" onclick="showTab('video')">▶ Video</button>
+    </div>
+
+    <!-- TIMELINE PANEL -->
+    <div class="multi-panel active" id="panel-timeline">
+      <h3 style="font-family:'Playfair Display',serif; color:var(--gold-light); font-size:1.5rem; text-align:center; margin-bottom:3rem; font-weight:400;">
+        Kasaysayan ng Panitikang Pilipino
+      </h3>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">900</div>
+            <div class="timeline-title">Panahon ng mga Baybayin</div>
+            <div class="timeline-desc">Ang mga sinaunang Pilipino ay gumagamit ng baybayin — isang sistematikong alpabeto na nagpapakita ng mataas na antas ng kaalaman at kultura.</div>
+          </div>
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="timeline-spacer"></div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-spacer"></div>
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="timeline-content">
+            <div class="timeline-date">1565</div>
+            <div class="timeline-title">Panahon ng Kolonyalismo</div>
+            <div class="timeline-desc">Dumating ang mga Kastila at nagdala ng impluwensya sa panitikan — mula sa pagsasaling-wika ng Bibliya hanggang sa paglikha ng mga korido at senakyulo.</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">1861</div>
+            <div class="timeline-title">Kapanahunan ni Rizal</div>
+            <div class="timeline-desc">Ipinanganak si Dr. José Rizal, ang pambansang bayani. Isinulat niya ang Noli Me Tangere, El Filibusterismo, at marami pang tula na nagsilbing sandata ng kalayaan.</div>
+          </div>
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="timeline-spacer"></div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-spacer"></div>
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="timeline-content">
+            <div class="timeline-date">1898</div>
+            <div class="timeline-title">Panahon ng Rebolusyon</div>
+            <div class="timeline-desc">Kasabay ng rebolusyong Pilipino, lumitaw ang maraming bayani at manunulat na gumagamit ng panitikan bilang sandata laban sa pananakop.</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">1946</div>
+            <div class="timeline-title">Kalayaan at Bagong Panitikan</div>
+            <div class="timeline-desc">Pagkatapos ng Ikalawang Digmaang Pandaigdig at pagtanggap ng kalayaan, lumago ang Pilipinong panitikan sa wikang Filipino at Ingles.</div>
+          </div>
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="timeline-spacer"></div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-spacer"></div>
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="timeline-content">
+            <div class="timeline-date">Kasalukuyan</div>
+            <div class="timeline-title">Panitikang Digital</div>
+            <div class="timeline-desc">Sa panahon ngayon, ang panitikang Pilipino ay patuloy na lumalago sa mga social media, blog, at digital na plataporma — tinatawid ang mga hangganan ng henerasyon.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- GALLERY PANEL -->
+    <div class="multi-panel" id="panel-gallery">
+      <h3 style="font-family:'Playfair Display',serif; color:var(--gold-light); font-size:1.5rem; text-align:center; margin-bottom:0.75rem; font-weight:400;">
+        Gallery ng Panitikang Pilipino
+      </h3>
+      <p style="text-align:center; color:rgba(250,243,232,0.5); font-size:0.9rem; margin-bottom:2rem;">
+        Mga larawang nagpapakita ng kaligirang pampanitikan
+      </p>
+      <div class="gallery-grid">
+        <div class="gallery-item gallery-item-1">
+          <div class="gallery-img-placeholder">
+            <div class="gallery-icon">📖</div>
+            <div class="gallery-caption">Florante at Laura<br><span style="font-size:0.78rem; opacity:0.7;">Francisco Balagtas, 1838</span></div>
+          </div>
+        </div>
+        <div class="gallery-item gallery-item-2">
+          <div class="gallery-img-placeholder">
+            <div class="gallery-icon">🦅</div>
+            <div class="gallery-caption">Ibong Adarna<br><span style="font-size:0.78rem; opacity:0.7;">Korido, ika-18 siglo</span></div>
+          </div>
+        </div>
+        <div class="gallery-item gallery-item-3">
+          <div class="gallery-img-placeholder">
+            <div class="gallery-icon">✍️</div>
+            <div class="gallery-caption">Sa Aking mga Kabata<br><span style="font-size:0.78rem; opacity:0.7;">José Rizal, 1869</span></div>
+          </div>
+        </div>
+        <div class="gallery-item gallery-item-4">
+          <div class="gallery-img-placeholder">
+            <div class="gallery-icon">🇵🇭</div>
+            <div class="gallery-caption">Baybayin<br><span style="font-size:0.78rem; opacity:0.7;">Sinaunang Pilipinong sulat</span></div>
+          </div>
+        </div>
+        <div class="gallery-item gallery-item-5">
+          <div class="gallery-img-placeholder">
+            <div class="gallery-icon">📜</div>
+            <div class="gallery-caption">Noli Me Tangere<br><span style="font-size:0.78rem; opacity:0.7;">José Rizal, 1887</span></div>
+          </div>
+        </div>
+        <div class="gallery-item gallery-item-6">
+          <div class="gallery-img-placeholder">
+            <div class="gallery-icon">🌺</div>
+            <div class="gallery-caption">Panitikang Bisaya<br><span style="font-size:0.78rem; opacity:0.7;">Rehiyonal na Panitikan</span></div>
+          </div>
+        </div>
+      </div>
+      <p style="text-align:center; color:rgba(250,243,232,0.35); font-size:0.82rem; margin-top:1.5rem; font-style:italic;">
+        * Palitan ng tunay na mga larawan ng akda ang mga placeholder na ito.
+      </p>
+    </div>
+
+    <!-- VIDEO PANEL -->
+    <div class="multi-panel" id="panel-video">
+      <h3 style="font-family:'Playfair Display',serif; color:var(--gold-light); font-size:1.5rem; text-align:center; margin-bottom:0.75rem; font-weight:400;">
+        Video: Kaalaman sa Panitikang Pilipino
+      </h3>
+      <p style="text-align:center; color:rgba(250,243,232,0.5); font-size:0.9rem; margin-bottom:2.5rem;">
+        I-click ang play button o i-embed ang YouTube video sa ibaba
+      </p>
+
+      <!-- Replace the src below with actual YouTube embed URL -->
+      <div style="max-width:800px; margin:0 auto; border-radius:var(--radius-lg); overflow:hidden; border:1px solid rgba(201,168,76,0.3); aspect-ratio:16/9;">
+        <iframe width="815" height="458" 
+        src="https://www.youtube.com/embed/QYZqqgpMI-g" 
+        title="KASAYSAYAN NG PANITIKANG FILIPINO" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        referrerpolicy="strict-origin-when-cross-origin" 
+        allowfullscreen>
+        </iframe>
+      </div>
+
+      <p style="text-align:center; color:rgba(250,243,232,0.35); font-size:0.82rem; margin-top:1.5rem; font-style:italic;">
+        * Palitan ng actual na YouTube embed URL ang nasa itaas. Halimbawa: https://www.youtube.com/embed/[VIDEO_ID]
+      </p>
+
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:1rem; margin-top:3rem;">
+        <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(201,168,76,0.15); border-radius:var(--radius-lg); padding:1.5rem; text-align:center;">
+          <div style="font-size:2rem; margin-bottom:0.5rem;">🎥</div>
+          <div style="font-size:0.9rem; font-weight:600; color:var(--gold-light); margin-bottom:0.25rem;">Florante at Laura</div>
+          <div style="font-size:0.8rem; color:rgba(250,243,232,0.5);">Full Story Animation</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(201,168,76,0.15); border-radius:var(--radius-lg); padding:1.5rem; text-align:center;">
+          <div style="font-size:2rem; margin-bottom:0.5rem;">🎧</div>
+          <div style="font-size:0.9rem; font-weight:600; color:var(--gold-light); margin-bottom:0.25rem;">Audio Narration</div>
+          <div style="font-size:0.8rem; color:rgba(250,243,232,0.5);">Sa Aking mga Kabata</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(201,168,76,0.15); border-radius:var(--radius-lg); padding:1.5rem; text-align:center;">
+          <div style="font-size:2rem; margin-bottom:0.5rem;">📺</div>
+          <div style="font-size:0.9rem; font-weight:600; color:var(--gold-light); margin-bottom:0.25rem;">Documentary</div>
+          <div style="font-size:0.8rem; color:rgba(250,243,232,0.5);">Ibong Adarna History</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== REFERENCES PAGE ===== -->
+<section id="references" class="page">
+  <div class="section-wrapper">
+    <div class="section-header">
+      <p class="section-eyebrow">Bibliograpiya</p>
+      <h2 class="section-title">Mga Sanggunian</h2>
+      <div class="section-line"></div>
+      <p class="section-desc">
+        Lahat ng pinagkukunan ng impormasyon na ginamit sa pagbuo ng website na ito.
+      </p>
+    </div>
+
+    <div class="refs-grid">
+
+      <div class="refs-category reveal">
+        <div class="refs-category-title">
+          <div class="refs-icon">📚</div>
+          Mga Libro
+        </div>
+        <div class="ref-item">
+          <div class="ref-title">Florante at Laura</div>
+          <div class="ref-detail">Balagtas, F. B. (1838). <em>Pinagdaanang buhay ni Florante at Laura sa cahariang Albania.</em> Maynila.</div>
+        </div>
+        <div class="ref-item">
+          <div class="ref-title">Noli Me Tangere</div>
+          <div class="ref-detail">Rizal, J. (1887). <em>Noli Me Tangere.</em> Berlino: Berliner Buchdruckerei-Actien-Gesellschaft.</div>
+        </div>
+        <div class="ref-item">
+          <div class="ref-title">Ibong Adarna</div>
+          <div class="ref-detail">De la Cruz, J. (ika-18 siglo). <em>Ang Ibong Adarna.</em> Tradisyonal na korido ng Pilipinas.</div>
+        </div>
+        <div class="ref-item">
+          <div class="ref-title">Panitikang Pambansa</div>
+          <div class="ref-detail">Almario, V. S. (2006). <em>Panitikang Pilipino: Kasaysayan at Pag-unlad.</em> UP Press.</div>
+        </div>
+      </div>
+
+      <div class="refs-category reveal">
+        <div class="refs-category-title">
+          <div class="refs-icon">🌐</div>
+          Mga Website
+        </div>
+        <div class="ref-item">
+          <div class="ref-title">Komisyon sa Wikang Filipino</div>
+          <div class="ref-detail">Opisyal na site ng KWF tungkol sa panitikang Pilipino.</div>
+          <a class="ref-link" href="https://www.foi.gov.ph/en/agencies/kwf/" target="_blank" rel="noopener">Komisyon sa Wikang Filipino ↗</a>
+        </div>
+        <div class="ref-item">
+          <div class="ref-title">Florante at Laura — Wikipedia</div>
+          <div class="ref-detail">Wikipedia Foundation. (2024). <em>Florante at Laura.</em> Nakuha noong 2024.</div>
+          <a class="ref-link" href="https://en.wikipedia.org/wiki/Florante_at_Laura" target="_blank" rel="noopener">Florante at Laura ↗</a>
+        </div>
+        <div class="ref-item">
+          <div class="ref-title">Ibong Adarna — Summary</div>
+          <div class="ref-detail">Tagalog Lang. (2024). <em>Ibong Adarna Summary.</em> Nakuha noong 2024.</div>
+          <a class="ref-link" href="https://en.wikipedia.org/wiki/Ibong_Adarna" target="_blank" rel="noopener">Ibong Adarna ↗</a>
+        </div>
+        <div class="ref-item">
+          <div class="ref-title">José Rizal — Opisyal na Talambuhay</div>
+          <div class="ref-detail">Rizal Shrine. (2024). <em>Sa Aking Mga Kabata.</em> Nakuha noong 2024.</div>
+          <a class="ref-link" href="https://tl.wikipedia.org/wiki/Jos%C3%A9_Rizal" target="_blank" rel="noopener">Talambuhay ↗</a>
+        </div>
+      </div>
+
+      <div class="refs-category reveal">
+        <div class="refs-category-title">
+          <div class="refs-icon">🖼</div>
+          Mga Larawan
+        </div>
+        <div class="ref-item">
+          <div class="ref-title">Portrait ni Francisco Balagtas</div>
+          <div class="ref-detail">National Historical Commission of the Philippines. (n.d.). Larawan ni Balagtas. Pampublikong domain.</div>
+        </div>
+        <div class="ref-item">
+          <div class="ref-title">Portrait ni José Rizal</div>
+          <div class="ref-detail">Lopez Memorial Museum. (n.d.). Koleksyon ng mga larawan ni Rizal. Pampublikong domain.</div>
+        </div>
+        <div class="ref-item">
+          <div class="ref-title">Baybayin Script</div>
+          <div class="ref-detail">Wikimedia Commons. (2024). <em>Baybayin alphabet chart.</em> Creative Commons license.</div>
+          <a class="ref-link" href="https://en.wikipedia.org/wiki/Baybayin" target="_blank" rel="noopener">baybayin ↗</a>
+        </div>
+      </div>
+
+      <div class="refs-category reveal">
+        <div class="refs-category-title">
+          <div class="refs-icon">▶</div>
+          Mga Video
+        </div>
+        <div class="ref-item">
+          <div class="ref-title">Florante at Laura — Animated Summary</div>
+          <div class="ref-detail">YouTube. (2022). <em>Florante at Laura Full Story.</em> Nakuha noong 2024.</div>
+          <a class="ref-link" href="https://www.youtube.com/watch?v=AiMT6WC-9g4" target="_blank" rel="noopener">Florante at Laura ↗</a>
+        </div>
+        <div class="ref-item">
+          <div class="ref-title">Ibong Adarna — Documentary</div>
+          <div class="ref-detail">YouTube. (2021). <em>Ibong Adarna: Ang Buong Kuwento.</em> Nakuha noong 2024.</div>
+          <a class="ref-link" href="https://www.youtube.com/watch?v=m0-Nq3dlwlI" target="_blank" rel="noopener">Ibong Adarna ↗</a>
+        </div>
+        <div class="ref-item">
+          <div class="ref-title">Panitikan ng Pilipinas: Kasaysayan</div>
+          <div class="ref-detail">DepEd Online Learning. (2023). <em>History of Philippine Literature.</em> Nakuha noong 2024.</div>
+          <a class="ref-link" href="https://www.youtube.com/watch?v=QYZqqgpMI-g" target="_blank" rel="noopener">Panitikan ng Pilipinas ↗</a>
+        </div>
+        <div class="ref-item">
+          <div class="ref-title">Sa Aking mga Kabata — Recitation</div>
+          <div class="ref-detail">YouTube. (2020). <em>Sa Aking mga Kabata ni Rizal.</em> Nakuha noong 2024.</div>
+          <a class="ref-link" href="https://www.youtube.com/watch?v=WIXJjCK1y_Q" target="_blank" rel="noopener">Sa Aking mga Kabata ↗</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="background:var(--cream); border-radius:var(--radius-lg); padding:2rem; margin-top:3rem; text-align:center; border:1px solid var(--cream-dark);">
+      <p style="font-size:0.85rem; color:var(--ink-light); line-height:1.7;">
+        <strong style="color:var(--burgundy);">Paalala:</strong> Lahat ng sanggunian ay nasa APA format.
+        Ang mga website link ay na-access noong taong pampaaralan 2024–2025.
+        Para sa mga larawan, ginamit lamang ang mga pampublikong domain o lisensyadong materyal.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-title">Panitikan ng Pilipinas — Tahanan ng Wikang Lahi</div>
+  <div class="footer-divider"></div>
+  <p>BSIT 1D &nbsp;|&nbsp; Taong Pampaaralan 2025–2026</p>
+  <p style="margin-top:0.5rem; font-size:0.8rem; opacity:0.6;">
+    Ginawa para sa pag-aaral ng Panitikang Pilipino &nbsp;·&nbsp;
+    HTML at CSS lamang &nbsp;·&nbsp; Responsive Design
+  </p>
+</footer>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+/* ---- Page Navigation ---- */
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById('nav-' + id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.getElementById('navLinks').classList.remove('open');
+  document.getElementById('hamburger').setAttribute('aria-expanded', 'false');
+  triggerReveal();
+}
+
+/* ---- Mobile Nav ---- */
+function toggleMobile() {
+  const nav = document.getElementById('navLinks');
+  const btn = document.getElementById('hamburger');
+  const isOpen = nav.classList.toggle('open');
+  btn.setAttribute('aria-expanded', isOpen);
+}
+
+/* ---- Multimedia Tabs ---- */
+function showTab(id) {
+  document.querySelectorAll('.multi-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.multi-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+/* ---- Scroll Reveal ---- */
+function triggerReveal() {
+  setTimeout(() => {
+    const els = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    els.forEach(el => {
+      el.classList.remove('visible');
+      observer.observe(el);
+    });
+  }, 100);
+}
+
+/* ---- Hero CTA scroll reveal ---- */
+document.addEventListener('DOMContentLoaded', function() {
+  triggerReveal();
+});
+</script>
+</body>
+</html>
