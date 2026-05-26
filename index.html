@@ -1031,6 +1031,40 @@ footer .footer-divider {
   background: linear-gradient(90deg, transparent, var(--gold-pale), transparent);
   margin: 2rem 0;
 }
+
+/* ===== WORK HEADER WITH IMAGE ===== */
+.work-header-img {
+  align-items: flex-end !important;
+}
+.work-header-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(30,5,10,0.88) 0%,
+    rgba(30,5,10,0.70) 50%,
+    rgba(30,5,10,0.45) 100%
+  );
+  z-index: 1;
+}
+
+.work-header-img{
+  display:flex;
+  align-items:flex-end;
+  overflow:hidden;
+}
+
+.work-header-left{
+  position:relative;
+  z-index:2;
+  width:100%;
+  padding:2rem;
+}
+
+.work-header-overlay{
+  pointer-events:none;
+}  
+  
 </style>
 </head>
 <body>
@@ -1245,13 +1279,21 @@ footer .footer-divider {
 
       <!-- AKDA 1: FLORANTE AT LAURA -->
       <article class="work-card reveal">
-        <div class="work-header">
-          <div class="work-header-left">
+        <div class="work-header work-header-img"
+          style="
+            background-image:url('Florante_at_Laura.png');
+            background-size:cover;
+            background-position:center;
+            background-repeat:no-repeat;
+            position:relative;
+            min-height:200px;
+          ">
+        <div class="work-header-overlay"></div>
+        <div class="work-header-left">
             <span class="work-type-badge">Epikong Awit</span>
             <h3 class="work-title">Florante at Laura</h3>
             <p class="work-author">ni Francisco Balagtas (Baltazar)</p>
           </div>
-          <div class="work-number" aria-hidden="true">01</div>
         </div>
         <div class="work-body">
           <div>
@@ -1297,8 +1339,17 @@ footer .footer-divider {
 
       <!-- AKDA 2: SA AKING MGA KABATA -->
       <article class="work-card reveal">
-        <div class="work-header">
-          <div class="work-header-left">
+        <div class="work-header work-header-img"
+          style="
+            background-image:url('Sa_aking_mga_Kabata.png');
+            background-size:cover;
+            background-position:center;
+            background-repeat:no-repeat;
+            position:relative;
+            min-height:200px;
+          ">
+        <div class="work-header-overlay"></div>
+        <div class="work-header-left">
             <span class="work-type-badge">Tula</span>
             <h3 class="work-title">Sa Aking mga Kabata</h3>
             <p class="work-author">ni José Protasio Rizal Mercado y Alonso Realonda</p>
@@ -1349,8 +1400,17 @@ footer .footer-divider {
 
       <!-- AKDA 3: IBONG ADARNA -->
       <article class="work-card reveal">
-        <div class="work-header">
-          <div class="work-header-left">
+         <div class="work-header work-header-img"
+          style="
+            background-image:url('Ibong_Adarna.png');
+            background-size:cover;
+            background-position:center;
+            background-repeat:no-repeat;
+            position:relative;
+            min-height:200px;
+          ">
+        <div class="work-header-overlay"></div>
+        <div class="work-header-left">
             <span class="work-type-badge">Korido / Alamat</span>
             <h3 class="work-title">Ibong Adarna</h3>
             <p class="work-author">Inaakalang ni José de la Cruz "Huseng Sisiw" (tradisyonal)</p>
